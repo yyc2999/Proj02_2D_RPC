@@ -14,11 +14,11 @@ namespace RPGM.Gameplay
         public Transform focus;
         public float smoothTime = 2;
 
-        Vector3 offset;
+        public Vector3 offset;
 
         void Awake()
         {
-            offset = focus.position - transform.position;
+            transform.position = focus.position;
         }
 
         void Update()
