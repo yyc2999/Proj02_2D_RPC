@@ -47,18 +47,31 @@ namespace RPGM.UI
                 model.dialog.SelectActiveButton();
         }
 
+        private Vector3 GoalVector;
         void CharacterControl()
         {
+            bool moveY = true;
+            bool moveX = true;
+            GoalVector = Vector3.zero;
+            
             if (Input.GetKey(KeyCode.UpArrow))
-                model.player.nextMoveCommand = Vector3.up * stepSize;
+                GoalVector += Vector3.up * stepSize;
             else if (Input.GetKey(KeyCode.DownArrow))
-                model.player.nextMoveCommand = Vector3.down * stepSize;
-            else if (Input.GetKey(KeyCode.LeftArrow))
-                model.player.nextMoveCommand = Vector3.left * stepSize;
-            else if (Input.GetKey(KeyCode.RightArrow))
-                model.player.nextMoveCommand = Vector3.right * stepSize;
+                GoalVector += Vector3.down * stepSize;
             else
-                model.player.nextMoveCommand = Vector3.zero;
+                moveY = false;
+            
+            if (Input.GetKey(KeyCode.LeftArrow))
+                GoalVector += Vector3.left * stepSize;
+            else if (Input.GetKey(KeyCode.RightArrow))
+                GoalVector += Vector3.right * stepSize;
+            else
+                moveX = false;
+            
+            if(moveY == false && moveX == false)
+                GoalVector = Vector3.zero;
+
+            model.player.nextMoveCommand = GoalVector;
         }
     }
 }

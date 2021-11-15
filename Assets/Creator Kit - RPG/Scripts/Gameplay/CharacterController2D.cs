@@ -58,6 +58,9 @@ namespace RPGM.Gameplay
 
         void UpdateAnimator(Vector3 direction)
         {
+            if (direction.y != 0)
+                direction = new Vector3(0, direction.y, direction.z);
+            
             if (animator)
             {
                 animator.SetInteger("WalkX", direction.x < 0 ? -1 : direction.x > 0 ? 1 : 0);
