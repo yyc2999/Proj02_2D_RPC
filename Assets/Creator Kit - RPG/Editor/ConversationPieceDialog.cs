@@ -130,6 +130,9 @@ namespace RPGM.Gameplay
             conversationPiece.audio = (AudioClip)EditorGUILayout.ObjectField(conversationPiece.audio, typeof(AudioClip), false);
             EditorGUILayout.PrefixLabel("Quest (Optional)");
             conversationPiece.quest = (Quest)EditorGUILayout.ObjectField(conversationPiece.quest, typeof(Quest), true);
+            EditorGUILayout.PrefixLabel("Reaction (Optional)");
+            conversationPiece.reactionImage = (Sprite)EditorGUILayout.ObjectField(conversationPiece.reactionImage, typeof(Sprite), false);
+            conversationPiece.reactionTime = EditorGUILayout.FloatField(conversationPiece.reactionTime);
 
             if (conversationScript.items.Count > 0)
             {

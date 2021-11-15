@@ -17,7 +17,7 @@ namespace RPGM.Events
         public GameObject gameObject;
         public ConversationScript conversation;
         public string conversationItemKey;
-
+        
         public override void Execute()
         {
             ConversationPiece ci;
@@ -115,7 +115,11 @@ namespace RPGM.Events
 
             //if conversation has an icon associated, this will display it.
             model.dialog.SetIcon(ci.image);
-        }
 
+            if (ci.reactionImage != null)
+            {
+                npc.ConversationAction(ci.reactionImage, ci.reactionTime);
+            }
+        }
     }
 }

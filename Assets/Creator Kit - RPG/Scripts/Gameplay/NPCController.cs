@@ -17,6 +17,29 @@ namespace RPGM.Gameplay
 
         GameModel model = Schedule.GetModel<GameModel>();
 
+        private Animator _npcAnimator;
+        private Animator npcAnimator
+        {
+            get
+            {
+                if (_npcAnimator == null)
+                    _npcAnimator = GetComponent<Animator>();
+                return _npcAnimator;
+            }
+        }
+        
+        private SpriteRenderer _npcSpriteRenderer;
+        private SpriteRenderer npcSpriteRenderer
+        {
+            get
+            {
+                if (_npcSpriteRenderer == null)
+                    _npcSpriteRenderer = GetComponent<SpriteRenderer>();
+                return _npcSpriteRenderer;
+            }
+        }
+
+        
         void OnEnable()
         {
             quests = gameObject.GetComponentsInChildren<Quest>();
@@ -70,6 +93,21 @@ namespace RPGM.Gameplay
                 }
             }
             return null;
+        }
+
+        public void ConversationAction(Sprite sprite, float time)
+        {
+            CancelInvoke();
+            
+            npcAnimator.enabled = false;
+            npcSpriteRenderer.sprite = sprite;
+            
+            Invoke("AnimatorResume", time == 0 ? 1.5f : time);
+        }
+
+        void AnimatorResume()
+        {
+            npcAnimator.enabled = true;
         }
     }
 }
